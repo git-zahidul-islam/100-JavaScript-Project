@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Notification</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <section>
+        <div class="button">
+            <button style="cursor: pointer; background-color: green; color: white;" onclick="showToast('success')">Success</button>
+            <button style="cursor: pointer; background-color: red; color: white;" onclick="showToast('error')">Error</button>
+            <button style="cursor: pointer; background-color: orange; color: white;" onclick="showToast('invalid')">Invalid</button>
+        </div>
+
+        <div id="toast-box"></div>
+    </section>
+
+    <script>
+        const toastBox = document.getElementById('toast-box');
+
+        const messages = {
+            success: { text: 'Successfully', icon: 'fa-check-circle',col: "green" },
+            error: { text: 'Error', icon: 'fa-times-circle',col: "red" },
+            invalid: { text: 'Invalid', icon: 'fa-exclamation-circle',col: "orange" }
+        };
+
+        function showToast(type) {
+    const toast = document.createElement('div');
+    toast.classList.add('toast');
+
+    // Add icon and message text
+    toast.innerHTML = `
+        <div class="toast_content">
+            <i style="color: ${messages[type].col};" class="fas ${messages[type].icon}"></i>
+            <p>${messages[type].text}</p>
+        </div>
+        <div style="background-color: ${messages[type].col};" class="progress-bar"></div>
+    `;
+
+    toastBox.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+    </script>
+</body>
+</html>
